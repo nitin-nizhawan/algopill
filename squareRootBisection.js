@@ -1,13 +1,24 @@
-function squareRootNewtonRaphson(num){
-    var sqroot = num/2, 
-        epsilon = num/1000000; //10^(-6);
-    var error = sqroot*sqroot - num;
+function squareRootBisection(num){
+    var min=1, max=num, 
+        epsilon = num/1000000, // 10^(-6);
+        mid,error;
+    // square root of numbers smaller than 1 is bigger than the number
+    if(num<=1.0){
+        min = num;
+        max = 1.0;
+    } 
+    mid = (min+max)/2;
+    error = mid*mid-num;
     while(Math.abs(error)>epsilon){
-        // xn+1 = xn - (xn*xn - num)/(2*xn);
-        sqroot = sqroot - (error)/(2*sqroot);
-        error = sqroot*sqroot - num;
+        if(error<0){
+            min = mid;
+        } else {
+            max = mid;
+        }
+        mid = (min+max)/2;
+        error = mid*mid-num;
     }
-    return sqroot;
+    return mid;
 }
 
-console.log(squareRootNewtonRaphson(3535334));
+console.log(squareRootBisection(0.004));
