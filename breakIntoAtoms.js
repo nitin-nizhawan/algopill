@@ -3,6 +3,8 @@ function breakIntoAtoms(n,S){
 
     var bitmap=[], // used as 30 bits bimap one for each number
         ithSet, // tmp variable 
+        ans=1,
+        tmp, //another temp variable
         i,j; // loop counters
     // set to 0 
     for(i=0;i<n;i++){ 
@@ -16,8 +18,8 @@ function breakIntoAtoms(n,S){
         }
     }
     bitmap.sort(function(a,b){ return a-b; });
-    var tmp = bitmap[0];
-    var ans = 1;
+    tmp = bitmap[0];
+    ans = 1;
     for(i=0;i<n;i++){
         if(tmp!=bitmap[i]){
             ans++;
