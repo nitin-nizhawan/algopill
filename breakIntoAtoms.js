@@ -1,22 +1,27 @@
 function breakIntoAtoms(n,S){
-    var bitmap=[];
-    // set to 0xfffffff 
-    for(var i=0;i<n;i++){
+    // Asumption , MAX length of S array is 30;
+
+    var bitmap=[], // used as 30 bits bimap one for each number
+        ithSet, // tmp variable 
+        i,j; // loop counters
+    // set to 0 
+    for(i=0;i<n;i++){ 
         bitmap[i] = 0;
     }
-    for(var j=0;j<S.length;j++){
-        for(var k=0;k<S[j].length;k++){
-            // set the jth bit of nth bitmap if jth set comtains number n;
-            bitmap[S[j][k]]|=1<<j;
+    for(i=0;i<S.length;i++){
+        ithSet = S[i];
+        for(j=0;j<ithSet.length;j++){
+            // set the ith bit of nth bitmap if ith set comtains number n;
+            bitmap[ithSet[j]]|=1<<i;
         }
     }
     bitmap.sort(function(a,b){ return a-b; });
     var tmp = bitmap[0];
     var ans = 1;
-    for(var l=0;l<n;l++){
-        if(tmp!=bitmap[l]){
+    for(i=0;i<n;i++){
+        if(tmp!=bitmap[i]){
             ans++;
-            tmp = bitmap[l];
+            tmp = bitmap[i];
         }
     }
     return ans;
